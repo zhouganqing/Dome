@@ -1,0 +1,28 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /springboot
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 1234
+    druid:
+      initial-size: 10 #初始化大小
+      max-active: 300  #最大连接池数量
+      min-idle: 10     #最小连接池数量
+      max-wait: 60000  #最大等待时间60秒
+      filters: stat,wall    #监控统计用的filter:stat 日志用的filter:log4j 防御sql注入的filter:wall
+      timeBetweenEvictionRunsMillis: 60000  #
+      minEvictableIdleTimeMillis: 300000    #连接保持空闲而不被驱逐的最小时间
+      validationQuery: SELECT 1 FROM DUAL   #用来检测连接是否有效的sql，要求是一个查询语句;如果为null,下面三个配置无效
+      testWhileIdle: true #建议配置为true，不影响性能，并且保证安全性
+      testOnBorrow: false #申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      testOnReturn: false #归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      #timeBetweenEvictionRunsMillis - testOnReturn 通常一起用
+      poolPreparedStatements: false #下面项配置后,该项会自动变为true,为啥还要配置???
+      maxPoolPreparedStatementPerConnectionSize: 200
+

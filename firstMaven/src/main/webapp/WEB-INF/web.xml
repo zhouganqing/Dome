@@ -1,0 +1,19 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!--如果log4j2.xml想放到指定位置，修改该路径-->
+  <!--<context-param>
+    <param-name>log4jConfiguration</param-name>
+    &lt;!&ndash; 日志配置文件路径，请根据具体项目自行调整 &ndash;&gt;
+    <param-value>classpath:conf/log4j2.xml</param-value>
+  </context-param>-->
+
+</web-app>
+
+
+
+

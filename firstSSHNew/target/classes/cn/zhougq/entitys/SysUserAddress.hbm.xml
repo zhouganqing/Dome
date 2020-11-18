@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.zhougq.entitys.SysUserAddress" table="SYS_USER_ADDRESS" schema="DAFY_OA2" dynamic-update="true">
+        <!--<id name="id" column="ID"/>-->
+        <!--Oracle seq生成ID,新增时返回ID-->
+        <id name="id" column="ID">
+            <!--<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+                <param name="sequence_name">seq_sys_user_address</param>
+            </generator>-->
+        </id>
+        <!--<id name="id" column="ID">
+            <generator class="identity"/>
+        </id>-->
+        <property name="province" column="PROVINCE"/>
+        <property name="city" column="CITY"/>
+        <property name="region" column="REGION"/>
+        <property name="address" column="ADDRESS"/>
+        <property name="addressType" column="ADDRESS_TYPE"/>
+        <property name="street" column="STREET"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,10 @@
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Model\bin\Debug\netcoreapp2.2\WebCoreDemo.Model.xml
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Model\bin\Debug\netcoreapp2.2\WebCoreDemo.Model.deps.json
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Model\bin\Debug\netcoreapp2.2\WebCoreDemo.Model.dll
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Model\bin\Debug\netcoreapp2.2\WebCoreDemo.Model.pdb
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Model\obj\Debug\netcoreapp2.2\WebCoreDemo.Model.csproj.CoreCompileInputs.cache
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Model\obj\Debug\netcoreapp2.2\WebCoreDemo.Model.AssemblyInfoInputs.cache
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Model\obj\Debug\netcoreapp2.2\WebCoreDemo.Model.AssemblyInfo.cs
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Model\obj\Debug\netcoreapp2.2\WebCoreDemo.Model.dll
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Model\obj\Debug\netcoreapp2.2\WebCoreDemo.Model.pdb
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Model\obj\Debug\netcoreapp2.2\WebCoreDemo.Model.csprojResolveAssemblyReference.cache

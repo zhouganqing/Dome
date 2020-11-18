@@ -1,0 +1,56 @@
+#SpringBoot的默认配置/端口号和应用程序路径
+server:
+  port: 8080
+  servlet:
+    context-path: /springboot
+#Druid 数据源配置
+spring:
+  #profiles:
+  #   active: dev  #多个配置文件,指定使用哪一个
+  datasource:
+    fn:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: 1234
+      initial-size: 10 #初始化大小
+      max-active: 300  #最大连接池数量
+      min-idle: 10     #最小连接池数量
+      max-wait: 60000  #最大等待时间60秒
+      filters: stat,wall    #监控统计用的filter:stat 日志用的filter:log4j 防御sql注入的filter:wall
+      timeBetweenEvictionRunsMillis: 60000  #
+      minEvictableIdleTimeMillis: 300000    #连接保持空闲而不被驱逐的最小时间
+      validationQuery: SELECT 1 FROM DUAL   #用来检测连接是否有效的sql，要求是一个查询语句;如果为null,下面三个配置无效
+      testWhileIdle: true #建议配置为true，不影响性能，并且保证安全性
+      testOnBorrow: false #申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      testOnReturn: false #归还连接时执行validationQuery检测连接是否有效，做了这个配置会降
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 200  #开启缓存 Oracle开启,MySQL建议关闭
+
+
+
+
+#自定义配置
+swagger2:
+  enable: true
+
+yaml:
+  str: 字符串可以不加引号
+  specialStr: "双引号可以转义\n特殊字符"
+  specialStr2: '单引号直接输出\n特殊字符'
+  flag: false
+  num: 666
+  Dnum: 88.88
+  list:
+    - one
+    - two
+    - two
+  set: [1,2,2,3]
+  map: {k1: v1, k2: v2}
+  positions:
+    - name: ITDragon
+      salary: 15000.00
+    - name: ITDragonBlog
+      salary: 18888.88
+
+

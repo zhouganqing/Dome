@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 引入数据库配置文件 db.properties -->
+    <context:property-placeholder location="classpath:db.properties" />
+
+    <!-- 自动注解 -->
+    <!--<context:component-scan base-package="cn.zhougq.Action" />-->
+    <!--<context:component-scan base-package="cn.zhougq.Service" />
+    <context:component-scan base-package="cn.zhougq.Dao" />-->
+
+    <!--配置数据源和连接池-->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="${db.driverClassName}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+        <!--还可以配置最大连接数等各种连接配置-->
+    </bean>
+
+    <!--配置SQLSessionFactory;hibernate配置文件的所有配置项都在这配置-->
+    <bean id="sqlSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <!--引用数据源-->
+        <property name="dataSource" ref="dataSource"/>
+
+        <!--配置SQL映射文件信息 包扫描的方式加载注解类 -->
+        <property name="mappingDirectoryLocations" value="cn/zhougq/Entitys"/>
+        <!--<property name="packagesToScan" >
+            <list>
+                <value>cn.zhougq.Entitys</value>
+            </list>
+        </property>-->
+        <!--Hibernate特性-->
+        <property name="hibernateProperties">
+            <props>
+                <!--方言,根据不同版本生成sql-->
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <!--输出sql日志  dev开发用，生产不需要-->
+                <prop key="hibernate.show_sql">true</prop>
+                <!--对sql语句格式化-->
+                <prop key="hibernate.format_sql">true</prop>
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+                <!--Session 管理方式,hibernate通常用thread,现把Session交给spring管理
+                org.springframework.orm.hibernate5.SpringSessionContext-->
+                <!--<prop key="hibernate.current_session_context_class">
+                    thread
+                </prop>-->
+            </props>
+        </property>
+    </bean>
+
+    <!--使用事务-->
+    <bean id="txManger" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <!--关联数据源的bean-->
+        <property name="sessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <!--注解方式对事务支持-->
+    <tx:annotation-driven transaction-manager="txManger"/>
+
+
+</beans>

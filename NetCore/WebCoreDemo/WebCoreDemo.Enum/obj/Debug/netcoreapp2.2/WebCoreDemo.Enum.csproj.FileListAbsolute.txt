@@ -1,0 +1,8 @@
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Enum\bin\Debug\netcoreapp2.2\WebCoreDemo.Enum.deps.json
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Enum\bin\Debug\netcoreapp2.2\WebCoreDemo.Enum.dll
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Enum\bin\Debug\netcoreapp2.2\WebCoreDemo.Enum.pdb
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Enum\obj\Debug\netcoreapp2.2\WebCoreDemo.Enum.csproj.CoreCompileInputs.cache
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Enum\obj\Debug\netcoreapp2.2\WebCoreDemo.Enum.AssemblyInfoInputs.cache
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Enum\obj\Debug\netcoreapp2.2\WebCoreDemo.Enum.AssemblyInfo.cs
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Enum\obj\Debug\netcoreapp2.2\WebCoreDemo.Enum.dll
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.Enum\obj\Debug\netcoreapp2.2\WebCoreDemo.Enum.pdb

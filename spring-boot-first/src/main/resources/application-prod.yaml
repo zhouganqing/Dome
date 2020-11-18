@@ -1,0 +1,42 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /springboot
+
+spring:
+  datasource:
+    fn:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: 1234
+      filters: stat
+      initialSize: 10
+      maxActive: 300
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 200
+
+  #Spring Data 自带数据库操作,底层使用hibernate
+  jpa:
+    show-sql: true #控制台显示sql
+    hibernate:
+      # ddl-auto: update #如果表不存在就创建,有数据做更新操作,按照实体类的映射关系
+      naming:
+        # 取消小驼峰到下划线映射(加上这个)
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+#指定mybatis的mapper.xml文件的存放位置
+mybatis:
+  #configuration:
+  #  map-underscore-to-camel-case: true #注解版 驼峰命名法映射开启
+  mapper-locations: classpath:cn/zhougq/mapper/mapping/*.xml
+
+

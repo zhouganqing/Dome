@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <!-- 当前POM模型的版本 -->
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- 项目坐标 -->
+  <!-- 公司或者组织的唯一标志，并且配置时生成的路径也是由此生成，
+  如cn.zhougq，maven会将该项目打成的jar包放本地路径：/cn/zhougq -->
+  <groupId>cn.zhougq</groupId>
+  <!-- 本项目的唯一ID，一个groupId下面可能多个项目，就是靠artifactId来区分的 -->
+  <artifactId>firstMaven</artifactId>
+  <!-- 本项目目前所处的版本号 -->
+  <version>1.0-SNAPSHOT</version>
+  <!-- 打包的机制，如pom,jar, maven-plugin, ejb, war, ear, rar, par，默认为jar -->
+  <packaging>war</packaging>
+
+  <!-- 项目信息 -->
+  <!-- 项目的名称, Maven产生的文档用 -->
+  <name>firstMaven Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <!-- 项目主页的URL, Maven 产生的文档用-->
+  <url>http://www.example.com</url>
+  <!-- 项目的详细描述, Maven 产生的文档用。 当这个元素能够用HTML格式描述时（例如，CDATA中的文本会被解析器忽略，
+         就可以包含HTML标签）， 不鼓励使用纯文本描述。如果你需要修改产生的web站点的索引页面，你应该修改你自己的
+         索引页文件，而不是调整这里的文档。 -->
+  <description> A maven project to study maven. </description>
+  <!-- 描述了这个项目构建环境中的前提条件。 -->
+  <prerequisites>
+    <!-- 构建该项目或使用该插件所需要的Maven的最低版本 -->
+    <maven>3.6.3</maven>
+  </prerequisites>
+
+  <!-- 为pom定义一些常量，在pom中的其它地方可以直接引用
+  使用方式 如下 ：${file.encoding} -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <slf4j.versions>1.7.30</slf4j.versions>
+    <log4j.version>2.13.3</log4j.version>
+  </properties>
+
+  <!-- 继承自该项目的所有子项目的默认依赖信息。这部分的依赖信息不会被立即解析,而是当子项目声明一个依赖
+        （必须描述group ID和artifact ID信息），如果group ID和artifact ID以外的一些信息没有描述，则通过
+            group ID和artifact ID匹配到这里的依赖，并使用这里的依赖信息。子项目直接使用dependencies -->
+  <!--<dependencyManagement>
+    <dependencies>
+      <dependency>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>-->
+
+  <!-- 定义本项目的依赖关系 -->
+  <dependencies>
+    <!--测试包-->
+    <dependency><!-- 每个dependency都对应这一个jar包 -->
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <!-- 依赖范围。在项目发布过程中，帮助决定哪些构件被包括进来。欲知详情请参考依赖机制。
+      - compile ：默认范围，用于编译
+      - provided：类似于编译，但支持你期待jdk或者容器提供，类似于classpath
+      - runtime: 在执行时需要使用
+      - test: 用于test任务时使用
+      - system: 需要外在提供相应的元素。通过systemPath来取得
+      - systemPath: 仅用于范围为system。提供相应的路径
+      - optional: 当项目自身被依赖时，标注依赖是否传递。用于连续依赖时使用 -->
+      <scope>test</scope>
+      <!-- 当计算传递依赖时， 从依赖构件列表里，列出被排除的依赖构件集。即告诉maven你只依赖指定的项目，不依赖项目的
+                 依赖。此元素主要用于解决版本冲突问题 -->
+      <!--<exclusions>
+        <exclusion>
+          <artifactId> spring-core </artifactId>
+          <groupId> org.springframework </groupId>
+        </exclusion>
+      </exclusions>-->
+
+      <!-- 可选依赖，如果你在项目B中把C依赖声明为可选，你就需要在依赖于B的项目（例如项目A）中显式的引用对C的依赖。
+           可选依赖阻断依赖的传递性。 -->
+<!--      <optional> true </optional>-->
+    </dependency>
+
+    <!--slf4j日志接口(实现类更换不影响项目使用)-->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.versions}</version>
+    </dependency>
+    <!--slf4j和log4j日志适配器(桥的作用);slf4j-log4j12为1.0版本；log4j-slf4j-impl为2.0版本-->
+    <!--<dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j.versions}</version>
+    </dependency>-->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <!--log4j2日志实现类(可以更换)-->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <!--如果是web程序必须添加-->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-web</artifactId>
+      <version>${log4j.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <!--使用注解,需安装插件lombok-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.12</version>
+    </dependency>
+
+    <!--MySQL驱动-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.20</version>
+    </dependency>
+
+    <!--MyBatis-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.4.5</version>
+    </dependency>
+
+    <!--tk.MyBatis 通用mapper -->
+    <dependency>
+      <groupId>tk.mybatis</groupId>
+      <artifactId>mapper</artifactId>
+      <version>4.0.0</version>
+    </dependency>
+
+    <!--druid数据库连接池-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.22</version>
+    </dependency>
+
+  </dependencies>
+
+  <!-- 构建项目需要的信息 -->
+  <build>
+    <!-- 产生的构件的文件名，默认值是${artifactId}-${version}。 -->
+    <finalName>firstMaven</finalName>
+    <!--子项目可以引用的默认插件信息。该插件配置项直到被引用时才会被解析或绑定到生命周期。给定插件的任何本地配置都会覆盖这里的配置-->
+
+    <resources>
+      <resource>
+        <!--将java文件夹下的所有properties和xml文件-->
+        <directory>src/main/java/</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+        </includes>
+        <!--<filtering>true</filtering>-->
+      </resource>
+
+    </resources>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <!--使用的插件列表 。-->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

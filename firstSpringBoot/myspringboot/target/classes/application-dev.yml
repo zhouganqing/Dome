@@ -1,0 +1,84 @@
+#SpringBoot的默认配置/端口号和应用程序路径
+server:
+  port: 8080
+  servlet:
+    context-path: /springboot
+
+#JDBC spring默认数据源配置
+#spring:
+  #datasource:
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://127.0.0.1:3306/mydb?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    #data-username: root
+    #data-password: 1234
+
+
+#Druid 数据源配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 1234
+    druid:
+      initial-size: 10 #初始化大小
+      max-active: 300  #最大连接池数量
+      min-idle: 10     #最小连接池数量
+      max-wait: 60000  #最大等待时间60秒
+      filters: stat,wall    #监控统计用的filter:stat 日志用的filter:log4j 防御sql注入的filter:wall
+      timeBetweenEvictionRunsMillis: 60000  #
+      minEvictableIdleTimeMillis: 300000    #连接保持空闲而不被驱逐的最小时间
+      validationQuery: SELECT 1 FROM DUAL   #用来检测连接是否有效的sql，要求是一个查询语句;如果为null,下面三个配置无效
+      testWhileIdle: true #建议配置为true，不影响性能，并且保证安全性
+      testOnBorrow: false #申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      testOnReturn: false #归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      #timeBetweenEvictionRunsMillis - testOnReturn 通常一起用
+      #poolPreparedStatements: false #下面项配置后,该项会自动变为true,为啥还要配置???
+      maxPoolPreparedStatementPerConnectionSize: 200  #开启缓存 Oracle开启,MySQL建议关闭
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      #connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      filter:
+        stat:
+          merge-sql: true
+          slow-sql-millis: 5000
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        #设置不统计哪些URL
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        session-stat-enable: true
+        session-stat-max-count: 100
+      stat-view-servlet:      #Druid的监控配置  访问路径：http://localhost:8080/druid/
+        enabled: true
+        url-pattern: /druid/* #访问地址规则
+        reset-enable: true    #是否允许清空统计数据
+        login-username: admin #配置监控页面的登录账户
+        login-password: admin #配置监控页面的登录密码
+        #allow: 127.0.0.1
+
+
+#自定义配置
+swagger2:
+  enable: true
+
+yaml:
+  str: 字符串可以不加引号
+  specialStr: "双引号可以转义\n特殊字符"
+  specialStr2: '单引号直接输出\n特殊字符'
+  flag: false
+  num: 666
+  Dnum: 88.88
+  list:
+    - one
+    - two
+    - two
+  set: [1,2,2,3]
+  map: {k1: v1, k2: v2}
+  positions:
+    - name: ITDragon
+      salary: 15000.00
+    - name: ITDragonBlog
+      salary: 18888.88
+
+

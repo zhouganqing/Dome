@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 使用接口 代理的方式 namespace必须和接口的全路径名称一致 -->
+<mapper namespace="cn.zhougq.mappers.NewMapper">
+
+    <resultMap id="BaseResultMap" type="cn.zhougq.pojo.NewsMod">
+        <id column="id" property="id" />
+        <result column="newName" property="title" />
+        <result column="newinfo" property="content" />
+    </resultMap>
+
+    <select id="selectAll" resultMap="BaseResultMap" >
+        select id,newName,newinfo from news
+    </select>
+
+
+</mapper>

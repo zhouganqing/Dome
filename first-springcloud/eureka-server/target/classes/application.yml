@@ -1,0 +1,13 @@
+server:
+  port: 8086
+
+eureka:
+  instance:
+    hostname: serviceCenter #实例的主机名
+  client:
+    #这两个配置代表本项目是否注册中心服务器
+    register-with-eureka: false #不把自己注册到eureka
+    fetch-registry: false #不从eureka上获取服务的注册信息
+
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}

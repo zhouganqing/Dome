@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zhougq.mapper.NewsModMapper">
+
+    <resultMap id="BaseResultMap" type="cn.zhougq.entity.NewsMod">
+        <id column="id" property="id" />
+        <result column="newName" property="title" />
+        <result column="newinfo" property="content" />
+    </resultMap>
+    <select id="getNewsModById" resultMap="BaseResultMap">
+        select id,newName,newinfo from news where id=#{id}
+    </select>
+
+</mapper>

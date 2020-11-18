@@ -1,0 +1,118 @@
+-- Add/modify columns 
+alter table CHECKOFF_COMMAND_FAIL add create_time date default sysdate;
+-- Add comments to the columns 
+comment on column CHECKOFF_COMMAND_FAIL.create_time
+  is '创建时间';
+
+
+
+
+
+
+招联
+create table checkoff_syncStatus
+(
+  id          number generated always as identity,
+  contract_no number,
+  status      varchar2(2) default 'a',
+  sendStatus  varchar2(2) default 'a',
+  change_time date ,
+  update_time date default sysdate,
+  send_time date default sysdate
+);
+
+comment on table checkoff_syncStatus
+  is '合同状态变更推送表';
+-- Add comments to the columns 
+comment on column checkoff_syncStatus.contract_no
+  is '合同号';
+  comment on column checkoff_syncStatus.status
+  is '变更状态：a正常k结清f逾期' ;
+  comment on column checkoff_syncStatus.sendStatus
+  is '推送状态：a待推送u推送中k推送成功f推送失败';
+  comment on column checkoff_syncStatus.change_time
+  is '状态变更时间';
+  comment on column checkoff_syncStatus.update_time
+  is '更新时间';
+  comment on column checkoff_syncStatus.send_time
+  is '推送时间';
+
+
+
+
+
+===================================================================
+
+
+
+-- Add/modify columns 
+alter table CS_CREDIT_EXT add is_compensatory NUMBER(2) default 0;
+-- Add comments to the columns 
+comment on column CS_CREDIT_EXT.is_compensatory
+  is '是否理赔；0否1是';
+
+
+
+
+-- Create table
+create table checkoff_Claim
+(
+  id           number(20) generated always as identity,
+  contractno  number(20),
+  capdays     number,
+  capital     number(10,2),
+  interest    number(10,2),
+  oint        number(10,2),
+  nint        number(10,2),
+  curnint     number(10,2),
+  claimamt    number(10,2),
+  claimstatus varchar2(2) default 'a',
+  tradedate   date,
+  actualclaimamt number(10,2),
+  remark       varchar2(500),
+  is_confirm number(2),
+  create_time  date default sysdate,
+  update_time  date default sysdate
+)
+;
+
+comment on table checkoff_Claim
+  is '理赔表';
+-- Add comments to the columns 
+comment on column checkoff_Claim.contractno
+  is '合同号';
+comment on column checkoff_Claim.capdays
+  is '逾期总天数';
+comment on column checkoff_Claim.capital
+  is '逾期总本金';
+comment on column checkoff_Claim.interest
+  is '逾期利息';
+comment on column checkoff_Claim.oint
+  is '逾期罚息';
+comment on column checkoff_Claim.nint
+  is '未到期本金产生的利息';
+comment on column checkoff_Claim.curnint
+  is '未到期本金（不包括逾期那部分本金）';
+comment on column checkoff_Claim.claimamt
+  is '担保理赔金额';
+comment on column CHECKOFF_CLAIM.tradedate
+  is '理赔时间';
+comment on column CHECKOFF_CLAIM.actualclaimamt
+  is '实际理赔金额';
+comment on column checkoff_Claim.claimstatus
+  is '理赔状态(a,u,f,k)';
+comment on column checkoff_Claim.remark
+  is '备注';
+comment on column checkoff_Claim.create_time
+  is '创建时间';
+comment on column checkoff_Claim.update_time
+  is '更新时间';
+comment on column CHECKOFF_CLAIM.is_confirm
+  is '是否确认0待确认1已确认';
+
+
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table checkoff_Claim
+  add constraint pk_checkoff_claim primary key (ID)
+  disable
+  novalidate;

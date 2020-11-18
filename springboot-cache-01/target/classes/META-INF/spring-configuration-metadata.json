@@ -1,0 +1,120 @@
+{
+  "groups": [
+    {
+      "name": "spring.redis",
+      "type": "cn.zhougq.redisson.config.RedisClusterProperties",
+      "sourceType": "cn.zhougq.redisson.config.RedisClusterProperties"
+    },
+    {
+      "name": "spring.redis",
+      "type": "cn.zhougq.redisson.config.RedisSingleProperties",
+      "sourceType": "cn.zhougq.redisson.config.RedisSingleProperties"
+    },
+    {
+      "name": "spring.redisson",
+      "type": "cn.zhougq.redisson.config.RedissonProperties",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.redis.cluster",
+      "type": "java.util.Map<java.lang.String,java.util.List<java.lang.String>>",
+      "sourceType": "cn.zhougq.redisson.config.RedisClusterProperties"
+    },
+    {
+      "name": "spring.redis.host",
+      "type": "java.lang.String",
+      "sourceType": "cn.zhougq.redisson.config.RedisSingleProperties"
+    },
+    {
+      "name": "spring.redis.password",
+      "type": "java.lang.String",
+      "sourceType": "cn.zhougq.redisson.config.RedisClusterProperties"
+    },
+    {
+      "name": "spring.redis.password",
+      "type": "java.lang.String",
+      "sourceType": "cn.zhougq.redisson.config.RedisSingleProperties"
+    },
+    {
+      "name": "spring.redis.port",
+      "type": "java.lang.String",
+      "sourceType": "cn.zhougq.redisson.config.RedisSingleProperties"
+    },
+    {
+      "name": "spring.redis.timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedisClusterProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "spring.redis.timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedisSingleProperties"
+    },
+    {
+      "name": "spring.redisson.connect-timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties"
+    },
+    {
+      "name": "spring.redisson.failed-attempts",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties"
+    },
+    {
+      "name": "spring.redisson.idle-connection-timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties"
+    },
+    {
+      "name": "spring.redisson.iscluster",
+      "type": "java.lang.Boolean",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.redisson.master-connection-pool-size",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties"
+    },
+    {
+      "name": "spring.redisson.reconnection-timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties"
+    },
+    {
+      "name": "spring.redisson.redisson-open",
+      "type": "java.lang.Boolean",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "spring.redisson.retry-attempts",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties"
+    },
+    {
+      "name": "spring.redisson.retry-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties"
+    },
+    {
+      "name": "spring.redisson.scan-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties"
+    },
+    {
+      "name": "spring.redisson.slave-connection-minimum-idle-size",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties"
+    },
+    {
+      "name": "spring.redisson.timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.redisson.config.RedissonProperties"
+    }
+  ],
+  "hints": []
+}

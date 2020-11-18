@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--加载属性文件 properties-->
+    <properties resource="config/mysql.properties"></properties>
+
+    <!--settings配置LOG4J2输出日志,跟xml文件名一致 -->
+    <settings>
+        <setting name="logImpl" value="LOG4J2"/>
+        <!--NONE 表示取消自动映射；
+        PARTIAL 只会自动映射没有定义嵌套结果集映射的结果集
+        FULL 会自动映射任意复杂的结果集（无论是否嵌套）
+        默认是partial，这是一种全局设置-->
+        <!--<setting name="autoMappingBehavior" value="PARTIAL"/>-->
+        <!--显示sql语句-->
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <!--当返回行的所有列都是空时，MyBatis默认返回null-->
+        <!--<setting name="returnInstanceForEmptyRow" value="true"/>-->
+
+        <!--二级缓存,全局设置-->
+        <setting name="cacheEnable" value="true"/>
+    </settings>
+
+    <!--设置别名-->
+    <typeAliases>
+        <!--单个类名-->
+        <!--<typeAlias alias="User" type="com.gxa.(项目名称).pojo.User"/>-->
+        <!--包名 映射实体类-->
+        <package name="cn.zhougq.pojo" />
+
+    </typeAliases>
+
+    <!-- 环境配置 -->
+    <environments default="development">
+
+        <!--开发环境-->
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!-- 数据库连接相关配置 ,这里动态获取config/mysql.properties文件中的内容-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}" />
+                <property name="url" value="${jdbc.conUrl}" />
+                <property name="username" value="${jdbc.username}" />
+                <property name="password" value="${jdbc.password}" />
+            </dataSource>
+        </environment>
+
+    </environments>
+    <!-- mapping文件路径配置
+        1、只有单独的Mybatis没有Spring的情况下,接口和xml必须保持在同一目录下
+        2、如果不在同一个目录：
+            <mapper resource="mapper/newsMapper.xml"/> 需要单独给每一个xml配置mapper
+            <package name="cn.zhougq.mapper"/> 代表接口包名
+     -->
+    <mappers>
+        <!-- 一个表一个映射 -->
+        <!--<mapper resource="mapper/newsMapper.xml"/>-->
+        <package name="cn.zhougq.mapper"/>
+    </mappers>
+
+</configuration>

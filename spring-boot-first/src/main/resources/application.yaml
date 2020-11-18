@@ -1,0 +1,38 @@
+
+spring:
+  profiles:
+    active: prod #指定使用哪个配置文件
+
+--- #代码块,可以把相同的配置使用代码块区分开
+server:
+  port: 8081
+  servlet:
+    context-path: /springboot
+
+
+
+logging:
+  level:
+    root: info #root级别默认info; level:只支持map类型
+
+#自定义配置
+yaml:
+  str: 字符串可以不加引号${yaml.aa:123} #设置默认值 属性无值的时候,按照原样输出
+  specialStr: "双引号可以转义\n特殊字符"
+  specialStr2: '单引号直接输出\n特殊字符'
+  birth: 2020/1/14
+  flag: false
+  num: 666
+  Dnum: 88.88
+  list:
+    - one
+    - two
+    - two
+  set: [1,2,2,3]
+  map: {k1: v1, k2: v2}
+  positions:
+    - name: ${yaml.str}_123 #使用上文属性
+      salary: 15000.00
+    - name: ITDragonBlog${random.int} #随机数
+      salary: 18888.88
+

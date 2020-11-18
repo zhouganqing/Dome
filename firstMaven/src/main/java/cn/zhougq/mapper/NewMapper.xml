@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 使用接口 代理的方式 namespace必须和接口的全路径名称一致 -->
+<mapper namespace="cn.zhougq.mapper.NewMapper">
+
+    <!--该mapper下全局缓存-->
+    <cache eviction="FIFO" flushInterval="6000" size="512" readOnly="true"/>
+
+    <!--嵌套实体映射;提高复用性-->
+    <resultMap id="infoResultMap" type="newInfo">
+        <id column="id" property="id"></id>
+        <result column="newName" property="title"/>
+    </resultMap>
+
+    <!--type==返回的实体-->
+    <resultMap id="BaseResultMap" type="newsMod">
+        <!--映射表字段和属性 jdbcType="INTEGER"
+            字段名和属性名一致，不需要映射，默认自动映射
+            autoMappingBehavior 全局设置
+
+            <id>设置主键,可以提高性能
+         -->
+        <id column="id" jdbcType="INTEGER" property="id" />
+
+        <result column="newName" jdbcType="VARCHAR" property="title" />
+        <!--不需要加jdbcType，会自动转换-->
+        <result column="newinfo" property="content" />
+
+        <!--嵌套实体映射;适用于 1对1 实体类嵌套实体-->
+        <association property="info" javaType="newInfo" resultMap="infoResultMap"/>
+        <!--<association property="info" javaType="newInfo">
+            <id column="id" property="id"></id>
+            <result column="newName" property="title"/>
+        </association>-->
+
+        <!--嵌套实体映射;适用于 1对多 实体类嵌套实体列表-->
+        <collection property="listInfo" ofType="newInfo" resultMap="infoResultMap"/>
+
+    </resultMap>
+    <!--id==接口对应的方法名；resultMap 返回指定实体;单个方法使用缓存-->
+    <select id="selectAll" resultMap="BaseResultMap" useCache="true">
+        select id,newName,newinfo from news
+    </select>
+
+    <select id="selectModeById" parameterType="Integer" resultMap="BaseResultMap">
+        /*
+        where 条件里 and 和 or 会被自动去掉,避免写入 where 1=1
+        条件判断 and 或者 or
+        */
+        select id,newName,newinfo from news
+        <where>
+            <if test="id!=null and id>0">
+            and id=#{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectModeInArray" resultMap="BaseResultMap">
+        select id,newName,newinfo from news where id in
+        <foreach collection="array" item="ids"
+         open="(" separator="," close=")"
+        >
+            #{ids}
+        </foreach>
+    </select>
+
+    <select id="selectModeInList" resultMap="BaseResultMap">
+        select id,newName,newinfo from news where id in
+        <foreach collection="list" item="ids"
+                 open="(" separator="," close=")"
+        >
+            #{ids}
+        </foreach>
+    </select>
+
+    <select id="selectModeInMapList" resultMap="BaseResultMap">
+        select id,newName,newinfo from news where id in
+        <foreach collection="ids" item="id"
+                 open="(" separator="," close=")"
+        >
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="selectListChoose" resultMap="BaseResultMap">
+        /*
+        choose 条件中有一个成立直接结束,都不成立走otherwise
+        &lt;==小于号
+        &gt;==大于号
+        */
+        select id,newName,newinfo from news where 1=1
+       <choose>
+       <when test="id&lt;0">
+           and newName like  concat('%','My','%')
+       </when>
+       <when test="id==0">
+           and newName like  concat('%','哈哈','%')
+       </when>
+       <when test="id&gt;0">
+           and id =#{id}
+       </when>
+        <otherwise>
+            and newName like  concat('%','嘿嘿','%')
+        </otherwise>
+       </choose>
+    </select>
+
+    <!--分页查询 Mysql 从第几条开始取多少条数据-->
+    <select id="selectListPage" resultMap="BaseResultMap">
+        select id,newName,newinfo from news
+        limit #{from},#{pageSize}
+    </select>
+
+    <!--自增ID返回/主键(自增)字段
+    useGeneratedKeys="true" keyProperty="id"-->
+    <insert id="insertNews" useGeneratedKeys="true" keyProperty="id" parameterType="newsMod">
+        insert into news(newName,newinfo) values (#{title},#{content})
+    </insert>
+
+    <!--根据实体修改-->
+    <update id="updateNews" parameterType="newsMod">
+        update news
+        /*set会自动去掉最后的,不建议在set内加if,实际中少用*/
+        <set>
+            <if test="title!=null and title!=''">newName=#{title},</if>
+            <if test="content!=null and content!=''">newinfo=#{content},</if>
+        </set>
+        where id= #{id}
+    </update>
+
+    <!--根据map修改-->
+    <update id="updateNewsByMap" parameterType="Map">
+        update news
+        /*
+        prefix  加前缀
+        suffixOverrides 替换最后一个匹配项
+        suffix  追加字符串(加后缀)
+        */
+         <trim prefix="set" suffixOverrides="," suffix="where id= #{id}">
+             <if test="title!=null and title!=''">newName=#{title},</if>
+             <if test="content!=null and content!=''">newinfo=#{content},</if>
+         </trim>
+    </update>
+
+    <delete id="deleteNews" parameterType="Integer">
+        /*
+        prefix 在有值的情况下,在第一个元素前 加前缀,
+        prefixOverrides 匹配第一个元素是否为and或者or,如果是的话忽略,类似避免写1=1
+        条件判断 and 或者 or
+        */
+        delete from news
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="id>0">
+                and id=#{id}
+            </if>
+        </trim>
+    </delete>
+</mapper>

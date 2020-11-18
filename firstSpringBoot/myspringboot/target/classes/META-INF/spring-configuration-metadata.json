@@ -1,0 +1,62 @@
+{
+  "groups": [
+    {
+      "name": "yaml",
+      "type": "cn.zhougq.Entitys.YamlEntity",
+      "sourceType": "cn.zhougq.Entitys.YamlEntity"
+    }
+  ],
+  "properties": [
+    {
+      "name": "yaml.d-num",
+      "type": "java.lang.Double",
+      "sourceType": "cn.zhougq.Entitys.YamlEntity"
+    },
+    {
+      "name": "yaml.flag",
+      "type": "java.lang.Boolean",
+      "sourceType": "cn.zhougq.Entitys.YamlEntity"
+    },
+    {
+      "name": "yaml.list",
+      "type": "java.util.List<java.lang.Object>",
+      "sourceType": "cn.zhougq.Entitys.YamlEntity"
+    },
+    {
+      "name": "yaml.map",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "sourceType": "cn.zhougq.Entitys.YamlEntity"
+    },
+    {
+      "name": "yaml.num",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.zhougq.Entitys.YamlEntity"
+    },
+    {
+      "name": "yaml.positions",
+      "type": "java.util.List<cn.zhougq.Entitys.Position>",
+      "sourceType": "cn.zhougq.Entitys.YamlEntity"
+    },
+    {
+      "name": "yaml.set",
+      "type": "java.util.Set<java.lang.Object>",
+      "sourceType": "cn.zhougq.Entitys.YamlEntity"
+    },
+    {
+      "name": "yaml.special-str",
+      "type": "java.lang.String",
+      "sourceType": "cn.zhougq.Entitys.YamlEntity"
+    },
+    {
+      "name": "yaml.special-str2",
+      "type": "java.lang.String",
+      "sourceType": "cn.zhougq.Entitys.YamlEntity"
+    },
+    {
+      "name": "yaml.str",
+      "type": "java.lang.String",
+      "sourceType": "cn.zhougq.Entitys.YamlEntity"
+    }
+  ],
+  "hints": []
+}

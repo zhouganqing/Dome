@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.zhougq.entitys.SysUserList" table="SYS_USER_LIST" schema="DAFY_OA2">
+        <id name="id" column="ID"/>
+        <property name="userName" column="USER_NAME"/>
+        <property name="status" column="STATUS"/>
+        <property name="roleId" column="ROLE_ID"/>
+        <property name="ident" column="IDENT"/>
+        <property name="password" column="PASSWORD"/>
+        <property name="phone" column="PHONE"/>
+        <property name="email" column="EMAIL"/>
+        <property name="province" column="PROVINCE"/>
+        <property name="city" column="CITY"/>
+        <property name="remark" column="REMARK"/>
+        <property name="easeMobName" column="EASE_MOB_NAME"/>
+        <property name="updateUser" column="UPDATE_USER"/>
+        <property name="updateTime" column="UPDATE_TIME"/>
+        <property name="updateIp" column="UPDATE_IP"/>
+        <property name="prodType" column="PROD_TYPE"/>
+        <property name="onlineFlag" column="ONLINE_FLAG"/>
+        <property name="gender" column="GENDER"/>
+        <property name="wxAttentionFlag" column="WX_ATTENTION_FLAG"/>
+        <property name="workingProperty" column="WORKING_PROPERTY"/>
+        <property name="workingDate" column="WORKING_DATE"/>
+        <property name="duty" column="DUTY"/>
+        <property name="major" column="MAJOR"/>
+        <property name="school" column="SCHOOL"/>
+        <property name="graduationDate" column="GRADUATION_DATE"/>
+        <property name="competency" column="COMPETENCY"/>
+        <property name="education" column="EDUCATION"/>
+        <property name="degree" column="DEGREE"/>
+        <property name="telphone" column="TELPHONE"/>
+        <property name="qq" column="QQ"/>
+        <property name="emergencyContact" column="EMERGENCY_CONTACT"/>
+        <property name="confirmTime" column="CONFIRM_TIME"/>
+        <property name="createTime" column="CREATE_TIME"/>
+        <property name="photoName" column="PHOTO_NAME"/>
+        <property name="national" column="NATIONAL"/>
+        <property name="hrId" column="HR_ID"/>
+        <property name="uuid" column="UUID"/>
+        <property name="companyName" column="COMPANY_NAME"/>
+        <property name="companyAddress" column="COMPANY_ADDRESS"/>
+        <property name="companyNo" column="COMPANY_NO"/>
+        <property name="deviceNumber" column="DEVICE_NUMBER"/>
+        <property name="phoneSysType" column="PHONE_SYS_TYPE"/>
+        <property name="manageArea" column="MANAGE_AREA"/>
+        <property name="department2" column="DEPARTMENT2"/>
+    </class>
+</hibernate-mapping>

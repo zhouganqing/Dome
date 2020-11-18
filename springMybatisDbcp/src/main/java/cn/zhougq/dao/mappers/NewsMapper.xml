@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.zhougq.dao.NewsMapper">
+
+    <resultMap id="defaultMap" type="news">
+        <result column="newName" property="title"/>
+        <result column="newinfo" property="content"/>
+    </resultMap>
+
+    <select id="getNewsList" resultMap="defaultMap">
+        select id,newName,newinfo from news
+    </select>
+
+    <!--自增ID返回/主键(自增)字段
+    useGeneratedKeys="true" keyProperty="id"-->
+    <insert id="insertNews" useGeneratedKeys="true" keyProperty="id" parameterType="news">
+        insert into news(newName,newinfo) values (#{title},#{content})
+    </insert>
+
+</mapper>

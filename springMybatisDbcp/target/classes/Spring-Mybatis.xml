@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--spring 加载属性文件-->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:mysql.properties"/>
+
+    <!--配置JNDI数据源 WEB项目下Tomcat内context.xml文件-->
+    <bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName">
+            <value>java:comp/env/jdbc/test</value>
+        </property>
+    </bean>
+
+    <!--配置数据源和连接池-->
+    <bean id="dataSource" destroy-method="close"
+          class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.conUrl}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!--还可以配置最大连接数等各种连接配置-->
+    </bean>
+    <!--配置druid连接池-->
+    <bean id="druidSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.conUrl}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--配置SQLSessionFactory;Mybatis配置文件的所有配置项都在这配置-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--引入Mybatis的配置;没替换成log4j2？？？？？-->
+        <property name="configLocation" value="mybatis-config.xml"/>
+
+         <!--引用数据源-->
+        <property name="dataSource" ref="jndiDataSource"/>
+        <!--配置SQL映射文件信息-->
+        <property name="mapperLocations">
+            <list>
+                <!--识别dao文件夹及子文件夹下的所有xml文件-->
+                <value>classpath:cn/zhougq/dao/**/*.xml</value>
+            </list>
+        </property>
+        <!--实体类别名-->
+        <property name="typeAliasesPackage" value="cn.zhougq.entitys"/>
+        <!--<property name="typeAliases">
+            <list>
+                <value>cn.zhougq.entitys.NewsMod</value>
+            </list>
+        </property>-->
+    </bean>
+
+    <!--配置SQLSessionTemplate Dao继承SqlSessionDaoSupport不需要配置-->
+    <!--<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory">
+        </constructor-arg>
+    </bean>-->
+
+    <!--配置Dao-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--如果配置多个sqlSessionFactory才需要指定对应数据源，否则会自动装配-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+        <property name="basePackage" value="cn.zhougq.dao"/>
+    </bean>
+    <!--Dao使用Mybatis,不需要注解;扫描Service即可-->
+    <context:component-scan base-package="cn.zhougq.services"/>
+
+
+    <!--JDBC事务管理器 dbcp2连接池可用；druid不支持该方式使用事务-->
+    <bean id="txManger" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--关联数据源的bean-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--注解方式对事务支持-->
+    <tx:annotation-driven transaction-manager="txManger"/>
+
+    <!--事务控制-->
+    <!--<tx:advice id="txAdvice" transaction-manager="txManger">
+        <tx:attributes>
+            &lt;!&ndash;事务超时时间：timeout默认-1不超时单位秒；&ndash;&gt;
+            <tx:method name="find" timeout="-1"/>
+            &lt;!&ndash;
+            * 匹配所有方法;propagation;
+            事务传播机制，默认REQUIRED，支持嵌套事务
+            事务隔离级别,默认DEFAULT
+            &ndash;&gt;
+            <tx:method name="*" propagation="REQUIRED" isolation="DEFAULT"/>
+        </tx:attributes>
+    </tx:advice>-->
+
+    <!--增强处理类-->
+    <bean id="loggerAop" class="cn.zhougq.aop.AopLogger"></bean>
+    <bean id="interceptor" class="cn.zhougq.aop.Interceptor"/>
+    <aop:config>
+        <!--切入点 * cn.zhou.*.*(..) -->
+        <aop:pointcut id="pointcut" expression="execution(* cn.zhougq.services.impl.*.*(..))"/>
+        <!--织入增强处理类-->
+        <!--<aop:advisor advice-ref="loggerAop" pointcut-ref="pointcut"/>-->
+        <!--织入事务-->
+        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>-->
+    </aop:config>
+
+
+</beans>

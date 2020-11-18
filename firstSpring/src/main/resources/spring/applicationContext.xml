@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+使用aop前缀标记，需添加对应引用
+使用P标记，需添加对应引用
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--通过bena实现调用方法(控制反转);Setter 方式注入 对应实现类-->
+    <bean id="helloSpring" class="cn.zhou.service.HelloSpring">
+        <!--属性赋值，跟类里set名一样,不对应属性-->
+        <property name="who">
+            <!--赋值-->
+            <value>Spring</value>
+        </property>
+    </bean>
+    <bean id="helloMybatis" class="cn.zhou.service.HelloSpring">
+        <property name="who">
+            <value>Mybatis</value>
+        </property>
+    </bean>
+
+
+    <bean id="redInk" class="cn.zhou.Impl.RedInkImpl"/>
+    <bean id="black" class="cn.zhou.Impl.BlackInkImpl"/>
+    <bean id="a4" class="cn.zhou.Impl.TextPaperImpl">
+        <property name="charPerLine">
+            <value>4</value>
+        </property>
+        <property name="linePage">
+            <value>4</value>
+        </property>
+    </bean>
+    <bean id="a5" class="cn.zhou.Impl.TextPaperImpl">
+        <property name="charPerLine">
+            <value>5</value>
+        </property>
+        <property name="linePage">
+            <value>5</value>
+        </property>
+    </bean>
+    <bean id="print" class="cn.zhou.service.Printer">
+        <property name="ink" ref="black"></property>
+        <property name="paper" ref="a5"></property>
+    </bean>
+
+    <!--接口本身不能作为class，只能是实现类-->
+    <bean id="userBase" class="cn.zhou.Impl.UserImpl"/>
+    <!--构造函数 方式注入-->
+    <bean id="userService" class="cn.zhou.service.impl.userServiceImpl">
+        <!--给构造函数里的参数赋值-->
+        <constructor-arg>
+            <!--引入bean 用ref,非基础类型，需要定义实体的bean 对应 userServiceImpl(UserBase dao)-->
+            <ref bean="userBase"/>
+        </constructor-arg>
+    </bean>
+    <bean id="userService1" class="cn.zhou.service.impl.userServiceImpl">
+        <constructor-arg>
+            <ref bean="userBase"/>
+        </constructor-arg>
+        <!--index 设置参数位置-->
+        <constructor-arg  index="0">
+            <value>123456</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="userService2" class="cn.zhou.service.impl.userServiceImpl">
+        <constructor-arg>
+            <ref bean="userBase"/>
+        </constructor-arg>
+        <!--type 设置参数类型-->
+        <constructor-arg type="int">
+            <value>123456</value>
+        </constructor-arg>
+    </bean>
+
+    <!--加P标记-->
+    <bean id="userB" class="cn.zhou.pojo.User"  p:userName="name1" p:passWord="pwd1" p:age="20"/>
+    <!--ref 引入bean用-->
+    <bean id="userService3" class="cn.zhou.service.impl.userServiceImpl" p:dao-ref="userBase"/>
+
+
+    <!--给实体的各种类型数据赋值-->
+    <bean id="testEntity" class="cn.zhou.pojo.TestEntity" p:specialChar2="P&amp;G" p:emptyValue="">
+        <property name="specialChar1">
+            <!-- <![CDATA[特殊字符的文本]]>  是XML语法，中括号内的所有文本会解析为纯文本 -->
+            <value><![CDATA[P&G]]></value>
+        </property>
+        <property name="nullValue">
+            <!--null值-->
+            <null/>
+        </property>
+
+        <!-- p:user-ref="userB" 外部bean；或者匿名内部bean-->
+        <property name="user">
+            <bean class="cn.zhou.pojo.User" p:userName="name2" p:passWord="pwd2" p:age="30"/>
+        </property>
+
+        <property name="list">
+            <list>
+                <value>1</value>
+                <value>2</value>
+                <!--
+                list 内部是实体可以使用bean 或者ref 都可以
+                <bean></bean>
+                <ref bean=""></ref>
+                -->
+            </list>
+        </property>
+        <property name="array">
+            <array>
+                <value>11</value>
+                <value>22</value>
+            </array>
+        </property>
+        <property name="set">
+            <set>
+                <value>33</value>
+                <value>44</value>
+            </set>
+        </property>
+        <property name="map">
+            <map>
+                <entry>
+                    <key>
+                        <value>keyValue</value>
+                    </key>
+                    <value>Object</value>
+                </entry>
+                <entry>
+                    <key>
+                        <value>keyValue2</value>
+                    </key>
+                    <value>Object2</value>
+                </entry>
+            </map>
+        </property>
+
+        <property name="props">
+            <props>
+                <prop key="key1">value1</prop>
+                <prop key="key2">value2</prop>
+            </props>
+        </property>
+
+    </bean>
+
+
+    <!--声明增强处理类的bean元素-->
+    <bean id="theLogger" class="cn.zhou.factory.LoggerAop"/>
+    <bean id="errLogger" class="cn.zhou.factory.AroundAop"/>
+    <aop:config>
+        <!-- 定义切入点
+        expression 切入点
+        public * print(..)
+        public * print(String) 匹配所有类型的返回值
+        public String *(String) 匹配所有方法名
+        public String print(..) 匹配所有参数类型和个数
+        * cn.zhou.*.*(..) 匹配cn.zhou的包下所有类的所有方法
+        * cn.zhou..*.*(..) 匹配cn.zhou的包及子包下所有类的所有方法
+        -->
+        <aop:pointcut id="pointcut" expression="execution(* cn.zhou.service.*.*(..))"/>
+        <!--织入增强处理-->
+        <!--<aop:aspect ref="theLogger">
+            &lt;!&ndash;前置增强,引入切入点&ndash;&gt;
+            <aop:before method="before" pointcut-ref="pointcut"/>
+            &lt;!&ndash;后置增强,方法正常执行并且不报错的情况下执行,引入切入点,注入目标方法的返回值&ndash;&gt;
+            <aop:after-returning method="afterReturning" pointcut-ref="pointcut" returning="result"/>
+            &lt;!&ndash;after-throwing异常抛出增强，通过throwing属性为参数e注入异常实例&ndash;&gt;
+            <aop:after-throwing method="errorThrow" pointcut-ref="pointcut" throwing="e"/>
+            &lt;!&ndash;最终增强,用于垃圾回收GC&ndash;&gt;
+            <aop:after method="after" pointcut-ref="pointcut"/>
+        </aop:aspect>-->
+
+        <aop:aspect ref="errLogger">
+            <!--环绕增强-->
+            <aop:around method="aroundThrow" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>

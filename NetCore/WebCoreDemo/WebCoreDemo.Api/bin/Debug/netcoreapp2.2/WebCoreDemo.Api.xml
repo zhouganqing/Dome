@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebCoreDemo.Api</name>
+    </assembly>
+    <members>
+        <member name="T:WebCoreDemo.Api.Controllers.v1.ValuesController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WebCoreDemo.Api.Controllers.v1.ValuesController.Get">
+            <summary>
+            方法注释
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:WebCoreDemo.Api.Controllers.v2.ValuesController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WebCoreDemo.Api.Controllers.v2.ValuesController.Get">
+            <summary>
+            方法注释
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebCoreDemo.Api.Filter.SwaggerOperationFilter.Apply(Swashbuckle.AspNetCore.Swagger.Operation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            应用过滤器
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="F:WebCoreDemo.Api.Startup.provider">
+            <summary>
+            Api版本提者信息
+            </summary>
+        </member>
+    </members>
+</doc>

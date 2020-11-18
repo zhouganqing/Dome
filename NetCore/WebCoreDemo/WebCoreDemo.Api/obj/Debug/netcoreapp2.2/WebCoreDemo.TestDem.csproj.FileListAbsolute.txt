@@ -1,0 +1,15 @@
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\bin\Debug\netcoreapp2.2\WebCoreDemo.TestDem.deps.json
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\bin\Debug\netcoreapp2.2\WebCoreDemo.TestDem.runtimeconfig.json
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\bin\Debug\netcoreapp2.2\WebCoreDemo.TestDem.runtimeconfig.dev.json
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\bin\Debug\netcoreapp2.2\WebCoreDemo.TestDem.dll
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\bin\Debug\netcoreapp2.2\WebCoreDemo.TestDem.pdb
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\obj\Debug\netcoreapp2.2\WebCoreDemo.TestDem.csprojResolveAssemblyReference.cache
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\obj\Debug\netcoreapp2.2\WebCoreDemo.TestDem.csproj.CoreCompileInputs.cache
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\obj\Debug\netcoreapp2.2\WebCoreDemo.TestDem.AssemblyInfoInputs.cache
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\obj\Debug\netcoreapp2.2\WebCoreDemo.TestDem.AssemblyInfo.cs
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\obj\Debug\netcoreapp2.2\WebCoreDemo.TestDem.dll
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\obj\Debug\netcoreapp2.2\WebCoreDemo.TestDem.pdb
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\bin\Debug\netcoreapp2.2\WebCoreDemo.TestDem.xml
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\bin\Debug\netcoreapp2.2\WebCoreDemo.Model.dll
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\bin\Debug\netcoreapp2.2\WebCoreDemo.Model.pdb
+D:\1_Demo\NetCore\WebCoreDemo\WebCoreDemo.TestDem\bin\Debug\netcoreapp2.2\WebCoreDemo.Model.xml
