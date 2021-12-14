@@ -40,7 +40,7 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <slf4j.versions>1.7.30</slf4j.versions>
-    <log4j.version>2.13.3</log4j.version>
+    <log4j.version>2.16.0</log4j.version>
   </properties>
 
   <!-- 继承自该项目的所有子项目的默认依赖信息。这部分的依赖信息不会被立即解析,而是当子项目声明一个依赖
